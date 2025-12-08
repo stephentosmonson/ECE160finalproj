@@ -1,8 +1,8 @@
-This project is a top-down 2-dimensional puzzle game. 
-Your main character will navigate simple puzzles and fight enemy NPCs to advance through several levels. 
-Below is a description of game components by each developer:
+One: Kyler
+Two: Woorim
+Three: Stephen
 
-Stephen (UI, background files, save data, sound):
--Upon running the main program, a screen will appear with a title and main menu
--Clicking "Start" with the mouse will enter the first game level
--Clicking "Exit" with the mouse will close the whole program
+Files are named starting with these assignments to tell who coded what files.
+
+
+12.7_5pm_draft contains current game functionality built by Stephen and Woorim.
