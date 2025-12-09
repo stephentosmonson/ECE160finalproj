@@ -1,0 +1,102 @@
+import pygame
+from pygame.locals import *
+import pickle
+pygame.init()
+
+screen_width = 400
+screen_height = 400
+
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("collision test")
+
+tile_size = 20
+
+#images BG
+bg_img = pygame.image.load('img/place_bg2.png')
+
+#def draw_grid():
+    #for lin in range(0,20):
+        #pygame.draw.line(screen,(255,255,255), (0,line * tile_size), (screenwith, line)
+
+#the player image and functions
+#class Player():
+    
+class Map1():
+    def __init__(self,data):
+        self.tile_list =[]
+        #images/assets
+        wall = pygame.image.load('img/place_wall.png')
+        floor = pygame.image.load('img/place_floor.png')
+
+        row_count = 0
+        for row in data:
+            col_count = 0
+            for tile in row:
+                if tile == 1:
+                    img = pygame .transform.scale(wall, (tile_size,tile_size))
+                    img_rect = img.get_rect()
+                    img_rect.x = col_count * tile_size
+                    img_rect.y = row_count * tile_size
+                    tile = (img , img_rect)
+                    self.tile_list.append(tile)
+                if tile == 2:
+                    img = pygame .transform.scale(floor, (tile_size,tile_size))
+                    img_rect = img.get_rect()
+                    img_rect.x = col_count * tile_size
+                    img_rect.y = row_count * tile_size
+                    tile = (img , img_rect)
+                    self.tile_list.append(tile)
+                col_count += 1
+            row_count += 1
+
+    def draw(self):
+        for tile in self.tile_list:
+            screen.blit(tile[0],tile[1])
+            #pygame.draw.rect(screen, (255,255,255), tile[1], 1)
+
+'''map_data = [
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1],
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+]'''
+
+#player = Player(200,200)
+pickle_in = open('map1_data.txt','rb')
+map_data = pickle.load(pickle_in)
+
+map = Map1(map_data)
+
+run = True
+while run:
+
+    screen.blit(bg_img, (0, 0))
+    
+
+    map.draw()
+
+    #player.update()
+
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+    
+    pygame.display.update()
+pygame.quit()
